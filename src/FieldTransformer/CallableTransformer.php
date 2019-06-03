@@ -15,7 +15,7 @@ final class CallableTransformer implements FieldTransformerInterface
         $this->defaultValue = $defaultValue;
     }
 
-    public function transformField($formFieldValue)
+    public function transformField(string $formFieldValue)
     {
         return ($this->callback)($formFieldValue);
     }

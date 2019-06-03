@@ -8,14 +8,34 @@ use PHPUnit\Framework\TestCase;
 
 class BorkTransformer implements FieldTransformerInterface
 {
-    public function transformField($formFieldValue)
+    public function transformField(string $formFieldValue)
     {
-        return $formFieldValue === null ? null : $formFieldValue.'-bork';
+        return $formFieldValue.'-bork';
     }
 
     public function getDefaultValue()
     {
         return 'bork';
+    }
+}
+
+final class TransformerWithConstructor implements FieldTransformerInterface
+{
+    private $addition;
+
+    public function __construct(string $addition)
+    {
+        $this->addition = $addition;
+    }
+
+    public function transformField(string $formFieldValue)
+    {
+        return $formFieldValue.$this->addition;
+    }
+
+    public function getDefaultValue()
+    {
+        return null;
     }
 }
 
@@ -214,6 +234,21 @@ final class FormDataTransformerTest extends TestCase
                 'wolf-1~~bork',
                 'wolf-2~~bork',
             ],
+        ], (new FormDataTransformer)->transform($formData, $config));
+    }
+
+    public function testTransformWithTransformerInstance(): void
+    {
+        $formData = [
+            'wolf' => 'boo'
+        ];
+
+        $config = [
+            'wolf' => new TransformerWithConstructor('-bar')
+        ];
+
+        $this->assertEquals([
+            'wolf' => 'boo-bar',
         ], (new FormDataTransformer)->transform($formData, $config));
     }
 }

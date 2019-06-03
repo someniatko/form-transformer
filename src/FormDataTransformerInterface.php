@@ -2,6 +2,8 @@
 
 namespace Someniatko\FormTransformer;
 
+use Someniatko\FormTransformer\Exception\UnexpectedValueException;
+
 interface FormDataTransformerInterface
 {
     /**
@@ -14,6 +16,7 @@ interface FormDataTransformerInterface
      *     field name => FieldTransformer class
      * Fields not specified in the config will be left as is.
      * @return array Normalized data
+     * @throws UnexpectedValueException
      */
     public function transform(array $formData, array $config) :array;
 }

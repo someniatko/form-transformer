@@ -5,7 +5,7 @@ namespace Tests\FieldTransformer;
 use PHPUnit\Framework\TestCase;
 use Someniatko\FormTransformer\FieldTransformer\IntegerField;
 
-final class  IntegerFieldTest extends TestCase
+final class IntegerFieldTest extends TestCase
 {
     /**
      * @dataProvider fieldDataProvider
@@ -25,5 +25,11 @@ final class  IntegerFieldTest extends TestCase
     public function testGetDefaultValue() :void
     {
         $this->assertNull((new IntegerField)->getDefaultValue());
+    }
+
+    public function testNonNumericValueResultsInException(): void
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        (new IntegerField)->transformField('abcd');
     }
 }

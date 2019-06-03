@@ -46,6 +46,10 @@ final class FormDataTransformer implements FormDataTransformerInterface
     {
         \assert(!is_array($configNode));
 
+        if ($configNode instanceof FieldTransformerInterface) {
+            return $configNode;
+        }
+
         return is_callable($configNode)
             ? new CallableTransformer($configNode)
             : new $configNode;

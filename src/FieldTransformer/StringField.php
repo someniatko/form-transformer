@@ -6,9 +6,8 @@ use Someniatko\FormTransformer\FieldTransformerInterface;
 
 final class StringField implements FieldTransformerInterface
 {
-    public function transformField($formFieldValue)
+    public function transformField(string $formFieldValue)
     {
-        \assert(is_string($formFieldValue));
         return $formFieldValue;
     }
 

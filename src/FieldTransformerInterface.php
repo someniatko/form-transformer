@@ -2,14 +2,17 @@
 
 namespace Someniatko\FormTransformer;
 
+use Someniatko\FormTransformer\Exception\UnexpectedValueException;
+
 interface FieldTransformerInterface
 {
     /**
      * Transforms form field value into normalized one
-     * @param mixed $formFieldValue
+     * @param string $formFieldValue
      * @return mixed
+     * @throws UnexpectedValueException
      */
-    public function transformField($formFieldValue);
+    public function transformField(string $formFieldValue);
 
     /**
      * Returns default field normalized value if form data does not contains the field
