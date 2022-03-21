@@ -1,6 +1,6 @@
 # form-transformer
 
-Library for transforming HTTP form request data into normalizable array. Requires at least PHP 7.2.
+Library for transforming HTTP form request data into normalizable array. Requires PHP 7.4, 8.0 or 8.1.
 
 For usage examples see `tests/FormDataTransformerTest.php`.
 
